@@ -34,14 +34,18 @@ func analyze() {
 	}
 }
 
+func execCmd(command string) {
+	cmd := exec.Command(command)
+	cmd.Stdout = os.Stdout
+	cmd.Run()
+}
+
 func main() {
 	for {
 		config := pkg.Configurations{}
 		config.SetConfigurations()
 
-		cmd := exec.Command("clear")
-		cmd.Stdout = os.Stdout
-		cmd.Run()
+		execCmd("clear")
 
 		analyze()
 		time.Sleep(time.Duration(config.Interval) * time.Second)
